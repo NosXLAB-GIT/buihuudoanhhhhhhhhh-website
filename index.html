@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bùi Hữu Doanh | Profile Học Sinh VIP</title>
+    <title>Bùi Hữu Doanh | Profile VIP Aura +999k</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #818cf8;
-            --secondary: #c084fc;
+            --primary: #ffd700; /* Màu vàng Aura */
+            --secondary: #818cf8; /* Sắc tím VIP */
             --accent: #ff4757;
             --bg-dark: #050505;
-            --card-bg: rgba(20, 20, 20, 0.8);
+            --card-bg: rgba(15, 15, 15, 0.9);
             --text-main: #ffffff;
             --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 215, 0, 0.2);
+            --aura-glow: 0 0 30px rgba(255, 215, 0, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,6 +26,10 @@
             font-family: 'Lexend', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 25%);
+            background-attachment: fixed;
         }
 
         /* --- AUTHENTICATION SCREEN --- */
@@ -47,7 +52,7 @@
             text-align: center;
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            box-shadow: 0 0 50px rgba(129, 140, 248, 0.2);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.1);
         }
 
         .pass-input {
@@ -56,28 +61,61 @@
             padding: 15px;
             border-radius: 18px;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-align: center;
             width: 100%;
             outline: none;
             letter-spacing: 12px;
             transition: 0.4s;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         /* --- MAIN CONTENT --- */
-        #main-content { opacity: 0; transform: scale(0.95); transition: 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        #main-content { opacity: 0; transform: scale(0.95); transition: 1.2s cubic-bezier(0.22, 1, 0.36, 1); display: none; }
 
         header {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 100px 20px 60px;
+            text-align: center;
             background: linear-gradient(to bottom, rgba(5, 5, 5, 0.2), var(--bg-dark)), 
                         url('https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/684824971_1479580180575074_3698330949065135884_n.jpg?raw=true');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-img-container {
             position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 40px var(--primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-img-container::after {
+            content: 'AURA +999,999,999';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: #000;
+            font-weight: 900;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 50px;
+            z-index: 3;
+            white-space: nowrap;
+            box-shadow: 0 0 15px var(--primary);
         }
 
         .main-title {
@@ -91,7 +129,7 @@
 
         .container {
             max-width: 1300px;
-            margin: -120px auto 0;
+            margin: -40px auto 0;
             padding: 0 25px;
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -115,14 +153,16 @@
             margin: 35px 0 20px;
             border-left: 5px solid var(--secondary);
             padding-left: 20px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .highlight-box {
-            background: rgba(129, 140, 248, 0.1);
+            background: rgba(255, 215, 0, 0.05);
             border: 1px dashed var(--primary);
             padding: 20px;
             border-radius: 15px;
             margin: 20px 0;
+            font-style: italic;
         }
 
         /* --- INFOBOX --- */
@@ -137,12 +177,14 @@
         }
 
         .infobox-header {
-            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            background: linear-gradient(135deg, #ffd700, #4f46e5);
             padding: 20px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 900;
+            color: #fff;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .infobox img { width: 100%; border-bottom: 3px solid var(--primary); }
@@ -154,7 +196,7 @@
         }
 
         .label { width: 45%; color: #64748b; font-weight: bold; font-size: 0.85rem; }
-        .value { width: 55%; color: #e2e8f0; text-align: right; font-size: 0.9rem; }
+        .value { width: 55%; color: var(--primary); text-align: right; font-size: 0.9rem; font-weight: 700; }
 
         /* --- GALLERY MASONRY --- */
         .gallery-section {
@@ -181,62 +223,67 @@
 
         .meme-item:hover {
             transform: scale(1.03) translateY(-10px);
-            border-color: var(--secondary);
-            box-shadow: 0 15px 30px rgba(192, 132, 252, 0.3);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
         }
 
-        .meme-item img { width: 100%; display: block; filter: grayscale(20%); transition: 0.5s; }
-        .meme-item:hover img { filter: grayscale(0%); }
+        .meme-item img { width: 100%; display: block; transition: 0.5s; }
 
-        .meme-tag {
+        .aura-tag {
             position: absolute;
             top: 10px; right: 10px;
             background: var(--secondary);
+            color: #fff;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: bold;
+            z-index: 5;
         }
 
-        .meme-desc { padding: 15px; text-align: center; font-weight: 500; background: #000; }
+        .meme-desc { padding: 15px; text-align: center; font-weight: 500; background: #000; color: #ccc; font-size: 0.9rem; }
 
         footer {
             text-align: center;
             padding: 100px 20px;
             background: linear-gradient(transparent, #0a0a0a);
+            border-top: 1px solid var(--border);
         }
 
         @media (max-width: 1000px) {
-            .container { grid-template-columns: 1fr; margin-top: -60px; }
+            .container { grid-template-columns: 1fr; margin-top: 0; }
+            .infobox { position: relative; top: 0; margin-bottom: 40px; }
             .masonry { column-count: 2; }
         }
 
-        @keyframes error-shake {
+        @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-15px); }
-            40% { transform: translateX(15px); }
-            60% { transform: translateX(-8px); }
-            80% { transform: translateX(8px); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
-        .error { animation: error-shake 0.5s ease-in-out; border-color: var(--accent) !important; }
+        .error-shake { animation: shake 0.4s; border-color: var(--accent) !important; }
     </style>
 </head>
 <body>
 
     <div id="lock-screen">
         <div class="login-card" id="lock-box">
-            <h2 style="margin-bottom: 2rem; letter-spacing: 5px;">HỆ THỐNG 3667</h2>
+            <h2 style="margin-bottom: 2rem; letter-spacing: 5px; color: var(--primary);">HỆ THỐNG 3667</h2>
             <input type="password" id="passInput" class="pass-input" placeholder="••••" maxlength="4" oninput="checkAuth()">
-            <p style="margin-top: 2rem; font-size: 0.8rem; color: #444;">Access Code Required</p>
+            <p style="margin-top: 2rem; font-size: 0.8rem; color: #555;">Vui lòng xác minh Aura để truy cập</p>
         </div>
     </div>
 
     <div id="main-content">
         <header>
-            <div style="text-align: center;">
-                <p style="letter-spacing: 10px; font-weight: 300; margin-bottom: 10px; color: var(--primary);">THE LEGENDARY</p>
-                <h1 class="main-title">Bùi Hữu Doanh</h1>
-                <p style="background: var(--accent); display: inline-block; padding: 5px 20px; border-radius: 50px; font-weight: bold; margin-top: 20px;">Hệ Tư Tưởng 36</p>
+            <div class="hero-img-container">
+                <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/d%C4%91.jpg?raw=true" class="hero-img" alt="Avatar VIP">
+            </div>
+            <p style="letter-spacing: 10px; font-weight: 300; margin-bottom: 10px; color: var(--primary);">THE LEGENDARY</p>
+            <h1 class="main-title">Bùi Hữu Doanh</h1>
+            <div style="margin-top: 20px;">
+                <p style="background: var(--primary); color: #000; display: inline-block; padding: 5px 25px; border-radius: 50px; font-weight: 900; letter-spacing: 2px; margin-right: 10px;">SIX SEVEN STYLE (67)</p>
+                <p style="background: var(--accent); color: #fff; display: inline-block; padding: 5px 25px; border-radius: 50px; font-weight: 900;">HỆ TƯ TƯỞNG 36</p>
             </div>
         </header>
 
@@ -246,77 +293,73 @@
                 <p><strong>Bùi Hữu Doanh</strong> (mã hiệu 3667) là gương mặt đại diện tiêu biểu cho tầng lớp <strong>học sinh VIP</strong>, đệ tử chân truyền của <strong>thầy Đinh Văn Hạnh</strong>. Anh nổi tiếng không chỉ bởi học thức mà còn bởi "thần thái vô cực" có thể biến mọi khoảnh khắc thành huyền thoại.</p>
                 
                 <div class="highlight-box">
-                    <strong>Tuyên ngôn:</strong> "Học không chỉ để lấy kiến thức, học để trở thành Meme Class S."
+                    "Đi kiểu 67, khí chất ngất trời. Đệ tử thầy Hạnh, học thức và hào quang luôn song hành."
                 </div>
 
-                <h3>Hệ tư tưởng 36</h3>
-                <p>Đây là một lối sống đề cao sự thực tế nhưng không thiếu phần hài hước. Người theo hệ tư tưởng 36 (đặc biệt là Doanh) luôn giữ được vẻ ngoài <strong>đa nồm, gay béo</strong> nhưng tâm hồn lại là một nghệ sĩ biểu cảm thực thụ.</p>
+                <h3>Hệ Tư Tưởng 36 (Six Seven)</h3>
+                <p>Đây là một lối sống đề cao sự thực tế nhưng không thiếu phần hài hước. Người theo hệ tư tưởng 36 luôn giữ được vẻ ngoài <strong>đa nồm, gay béo</strong> nhưng tâm hồn lại là một nghệ sĩ biểu cảm thực thụ, nơi thần thái và Aura hòa làm một.</p>
 
                 <h3>Mối quan hệ sư đồ</h3>
-                <p>Dưới sự dẫn dắt của <strong>thầy Đinh Văn Hạnh</strong>, Bùi Hữu Doanh đã phát triển tối đa kỹ năng "side-eye" và "deep-thinking", đưa tên tuổi mình vượt ra khỏi phạm vi trường học để trở thành một biểu tượng cộng đồng.</p>
+                <p>Dưới sự dẫn dắt của <strong>thầy Đinh Văn Hạnh</strong>, Doanh đã tôi luyện khả năng áp chế mọi bài kiểm tra bằng lượng Aura khổng lồ. Anh phát triển tối đa kỹ năng "side-eye" và "deep-thinking", đưa tên tuổi mình trở thành biểu tượng Class S.</p>
 
-                <p style="margin-top: 20px;">Hiện tại, anh đang giữ chức vụ <em>Tổng tư lệnh Meme</em> của dự án Wiki 3667, tiếp tục cống hiến những bức ảnh chất lượng cao cho nhân loại.</p>
+                <p style="margin-top: 20px;">Hiện tại, anh đang giữ chức vụ <em>Tổng tư lệnh Aura</em> của dự án Wiki 3667, liên tục cập nhật những khoảnh khắc xuất thần cho nhân loại.</p>
             </article>
 
             <aside class="infobox">
-                <div class="infobox-header">HỒ SƠ HỌC SINH VIP</div>
-                <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/645733497_3313763408783728_5072478343409576883_n.jpg?raw=true" alt="Main Photo">
+                <div class="infobox-header">AURA MASTER DATABASE</div>
+                <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/645733497_3313763408783728_5072478343409576883_n.jpg?raw=true" alt="Main Aura Photo">
                 <div class="infobox-content">
                     <div class="infobox-row"><div class="label">Họ và tên</div><div class="value">Bùi Hữu Doanh</div></div>
-                    <div class="infobox-row"><div class="label">Mã học sinh</div><div class="value">VIP-3667-36</div></div>
-                    <div class="infobox-row"><div class="label">Sư phụ</div><div class="value">Thầy Đinh Văn Hạnh</div></div>
+                    <div class="infobox-row"><div class="label">Mã số</div><div class="value">VIP-3667-67</div></div>
+                    <div class="infobox-row"><div class="label">Sư phụ</div><div class="value">Đinh Văn Hạnh</div></div>
                     <div class="infobox-row"><div class="label">Đặc điểm</div><div class="value">Đa nồm, Gay béo</div></div>
-                    <div class="infobox-row"><div class="label">Hệ tư tưởng</div><div class="value">Hệ 36</div></div>
-                    <div class="infobox-row"><div class="label">Xếp hạng</div><div class="value" style="color: #fbbf24; font-weight: 900;">LEGENDARY</div></div>
+                    <div class="infobox-row"><div class="label">Aura Level</div><div class="value">+999,999,999</div></div>
+                    <div class="infobox-row"><div class="label">Xếp hạng</div><div class="value" style="color: #fbbf24;">LEGENDARY</div></div>
                 </div>
             </aside>
         </div>
 
         <section class="gallery-section">
-            <h2 style="font-size: 3rem; text-align: center; margin-bottom: 50px;">KHO TÀNG MEME CLASS S</h2>
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; font-family: 'Space Grotesk', sans-serif; color: var(--primary);">MEME CLOUD <span style="color: #fff;">AURA EDITION</span></h2>
             <div class="masonry">
+                <!-- Tổng hợp meme từ cả 2 bản -->
                 <div class="meme-item">
-                    <span class="meme-tag">Hệ 36</span>
+                    <span class="aura-tag">AURA +999M</span>
+                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/bacsi.jpg?raw=true">
+                    <div class="meme-desc">Bác sĩ Quang</div>
+                </div>
+                <div class="meme-item">
+                    <span class="aura-tag">HỆ 36</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/423454216_668513748606455_949962820500855040_n.png?raw=true">
                     <div class="meme-desc">Nụ cười tỏa nắng (Đa nồm mode)</div>
                 </div>
                 <div class="meme-item">
-                    <span class="meme-tag">VIP</span>
+                    <span class="aura-tag">VIP</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/636995558_1279889014046898_4836545181827392685_n.jpg?raw=true">
                     <div class="meme-desc">Khi thầy Hạnh gọi lên bảng</div>
                 </div>
                 <div class="meme-item">
-                    <span class="meme-tag">Gay béo</span>
+                    <span class="aura-tag">RARE DROP</span>
+                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/123131233.jpg?raw=true">
+                    <div class="meme-desc">Xuất thần chi lộ</div>
+                </div>
+                <div class="meme-item">
+                    <span class="aura-tag">GAY BÉO</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/645502709_1982115719043595_242701125643771477_n.jpg?raw=true">
                     <div class="meme-desc">Ánh mắt hình viên đạn</div>
                 </div>
                 <div class="meme-item">
-                    <span class="meme-tag">Hệ 36</span>
-                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/648113431_943062458239861_6189645555608469197_n.jpg?raw=true">
-                    <div class="meme-desc">Tâm bất biến giữa dòng đời</div>
+                    <span class="aura-tag">SUPREME</span>
+                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/678339358_1191577782964143_7167772305928426956_n.png?raw=true">
+                    <div class="meme-desc">Thực thể tối cao</div>
                 </div>
                 <div class="meme-item">
-                    <span class="meme-tag">VIP</span>
-                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/649134167_911382061642820_3307970337157452572_n.jpg?raw=true">
-                    <div class="meme-desc">Phán xét nhân sinh</div>
-                </div>
-                <div class="meme-item">
-                    <span class="meme-tag">Final Boss</span>
+                    <span class="aura-tag">FINAL BOSS</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/650985336_1670039313995217_8382894242339043949_n.jpg?raw=true">
                     <div class="meme-desc">Học sinh giỏi thầy Hạnh</div>
                 </div>
                 <div class="meme-item">
-                    <span class="meme-tag">Hệ 36</span>
-                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/678339358_1191577782964143_7167772305928426956_n.png?raw=true">
-                    <div class="meme-desc">Vẻ đẹp tiềm ẩn</div>
-                </div>
-                <div class="meme-item">
-                    <span class="meme-tag">VIP</span>
-                    <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/680729449_2195140231307243_6765644180750515412_n.jpg?raw=true">
-                    <div class="meme-desc">Nét ngầu truyền thống</div>
-                </div>
-                <div class="meme-item">
-                    <span class="meme-tag">The Legend</span>
+                    <span class="aura-tag">LEGACY</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/684824971_1479580180575074_3698330949065135884_n.jpg?raw=true">
                     <div class="meme-desc">Sự im lặng của bầy cừu</div>
                 </div>
@@ -324,8 +367,8 @@
         </section>
 
         <footer>
-            <p style="opacity: 0.8; letter-spacing: 5px;">NOSXLAB x BÙI HỮU DOANH</p>
-            <p style="font-size: 0.7rem; margin-top: 15px; color: #444;">© 2026 - Crafted for the real student VIP</p>
+            <p style="font-weight: 800; color: var(--primary); letter-spacing: 5px; font-size: 1.2rem;">NOSXLAB x 67 STYLE</p>
+            <p style="font-size: 0.7rem; color: #444; margin-top: 15px;">© 2026 - Crafted for the real Aura Master</p>
         </footer>
     </div>
 
@@ -338,8 +381,7 @@
 
             if (input.value === '3667') {
                 lockScreen.style.opacity = '0';
-                lockScreen.style.filter = 'blur(50px)';
-                
+                lockScreen.style.filter = 'blur(40px)';
                 setTimeout(() => {
                     lockScreen.style.display = 'none';
                     mainContent.style.display = 'block';
@@ -349,11 +391,11 @@
                     }, 50);
                 }, 800);
             } else if (input.value.length === 4) {
-                box.classList.add('error');
+                box.classList.add('error-shake');
                 setTimeout(() => {
-                    box.classList.remove('error');
+                    box.classList.remove('error-shake');
                     input.value = '';
-                }, 500);
+                }, 400);
             }
         }
     </script>
