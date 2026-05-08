@@ -18,7 +18,7 @@
             --aura-glow: 0 0 30px rgba(255, 215, 0, 0.2);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/games/gam-4/gam373.cur'), auto !important; }
 
         body {
             background-color: var(--bg-dark);
@@ -30,6 +30,16 @@
                 radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 25%),
                 radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 25%);
             background-attachment: fixed;
+        }
+
+        /* --- BACKGROUND CANVAS --- */
+        #aura-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         /* --- AUTHENTICATION SCREEN --- */
@@ -250,6 +260,22 @@
             border-top: 1px solid var(--border);
         }
 
+        /* Float Aura Stats */
+        .aura-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 12px;
+            z-index: 1000;
+            font-size: 0.8rem;
+            color: var(--primary);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
         @media (max-width: 1000px) {
             .container { grid-template-columns: 1fr; margin-top: 0; }
             .infobox { position: relative; top: 0; margin-bottom: 40px; }
@@ -265,6 +291,10 @@
     </style>
 </head>
 <body>
+
+    <canvas id="aura-canvas"></canvas>
+    
+    <div class="aura-counter" id="auraCount">AURA LEVEL: <span id="auraVal">999,000</span></div>
 
     <div id="lock-screen">
         <div class="login-card" id="lock-box">
@@ -313,7 +343,7 @@
                     <div class="infobox-row"><div class="label">Mã số</div><div class="value">VIP-3667-67</div></div>
                     <div class="infobox-row"><div class="label">Sư phụ</div><div class="value">Đinh Văn Hạnh</div></div>
                     <div class="infobox-row"><div class="label">Đặc điểm</div><div class="value">Chuyên trị các bệnh "Lý" cho anh em.</div></div>
-                    <div class="infobox-row"><div class="label">Aura Level</div><div class="value">+999,999,999</div></div>
+                    <div class="infobox-row"><div class="label">Aura Level</div><div class="value aura-val">+999,999,999</div></div>
                     <div class="infobox-row"><div class="label">Xếp hạng</div><div class="value" style="color: #fbbf24;">LEGENDARY</div></div>
                 </div>
             </aside>
@@ -322,7 +352,6 @@
         <section class="gallery-section">
             <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px; font-family: 'Space Grotesk', sans-serif; color: var(--primary);">MEME CLOUD <span style="color: #fff;">AURA EDITION</span></h2>
             <div class="masonry">
-                <!-- Tổng hợp meme từ cả 2 bản -->
                 <div class="meme-item">
                     <span class="aura-tag">AURA +999M</span>
                     <img src="https://github.com/NosXLAB-GIT/buihuudoanhhhhhhhhh-website/blob/main/image/bacsi.jpg?raw=true">
@@ -373,18 +402,80 @@
     </div>
 
     <script>
+        // Matrix Aura Background Effect
+        const canvas = document.getElementById('aura-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? '#ffd700' : '#818cf8';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.01;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (particles.length < 100) particles.push(new Particle());
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].size <= 0.2) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        animateCanvas();
+
+        // Auth Logic
         function checkAuth() {
             const input = document.getElementById('passInput');
             const lockScreen = document.getElementById('lock-screen');
             const mainContent = document.getElementById('main-content');
             const box = document.getElementById('lock-box');
+            const auraCount = document.getElementById('auraCount');
 
             if (input.value === '3667') {
+                // Play Success Sound (optional, using browser beep)
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                osc.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+
                 lockScreen.style.opacity = '0';
                 lockScreen.style.filter = 'blur(40px)';
                 setTimeout(() => {
                     lockScreen.style.display = 'none';
                     mainContent.style.display = 'block';
+                    auraCount.style.display = 'block';
                     setTimeout(() => {
                         mainContent.style.opacity = '1';
                         mainContent.style.transform = 'scale(1)';
@@ -398,6 +489,14 @@
                 }, 400);
             }
         }
+
+        // Aura Counter Increase on Scroll
+        window.addEventListener('scroll', () => {
+            const val = document.getElementById('auraVal');
+            let current = parseInt(val.innerText.replace(/,/g, ''));
+            current += Math.floor(Math.random() * 500);
+            val.innerText = current.toLocaleString();
+        });
     </script>
 </body>
 </html>
